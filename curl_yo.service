@@ -1,0 +1,13 @@
+[Unit]
+Description=Servidor Node.js curl_yo
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /home/sergio/curl_yo/index.js
+WorkingDirectory=/home/sergio/curl_yo
+Restart=always
+User=sergio
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
