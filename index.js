@@ -1,9 +1,13 @@
-const express = require('express');
+const fs = require("fs");
+const express = require("express");
 const app = express();
 
-const PORT = 7777
-const ASCII = `
-......................................
+const PORT = 7777;
+let ASCII;
+try {
+  ASCII = fs.readFileSync(__dirname + "/ascii.txt", "utf-8");
+} catch (err) {
+  ASCII = `......................................
 .................@@. @@...............
 ...............#.      @..............
 ...............@   @.  :@.............
@@ -25,31 +29,33 @@ const ASCII = `
 ...............@@@@..@@...............
 ...................@*@................
 ......................................
-....https://github.com/ksergiocom.....
-......................................
+Put your "ascii.txt" into your 
+proyect path to customize the output:
+${__dirname}
+It must match the exact name!
 `;
+}
 
 // Colores ANSI
 const COLORS = [31, 32, 33, 34, 35, 36];
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.setHeader("Content-Type", "text/plain");
 
+  let i = 0;
   const interval = setInterval(() => {
     const color = COLORS[i % COLORS.length];
+    i++;
 
     // Hex, node templates no aceptan Octal...
     res.write(`\x1b[2J\x1b[H\x1b[${color}m${ASCII}\x1b[0m\n`);
-
-
   }, 100);
 
   // Cuando el cliente cierra la conexión, para el interval
-  req.on('close', () => {
+  req.on("close", () => {
     clearInterval(interval);
   });
 });
-
 
 app.listen(PORT, () => {
   console.log(`Serving on http://localhost:${PORT}`);
