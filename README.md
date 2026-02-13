@@ -2,6 +2,11 @@
 
 Esto es un clon inspirado de parrot.live
 
+```bash
+# ¡Cuidado epilépticos!
+curl yo.ksergio.com
+```
+
 ![gif](./res.gif)
 
 ## Como usar
