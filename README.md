@@ -2,7 +2,7 @@
 
 Esto es un clon inspirado de parrot.live
 
-![foto](./img.png)
+![gif](./res.gif)
 
 ## Como usar
 
